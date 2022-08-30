@@ -102,25 +102,22 @@ const displayDetails = (data) => {
     const modalBody = document.getElementById('modal-body');
     modalBody.innerHTML = ``;
     modalBody.innerHTML = `
-
-    <div class="card mb-3 border-0" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4 d-flex flex-column align-items-center">
-      <img src="${data.image}" class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-       <p class="mb-1"><small>Release Date : ${data.releaseDate}</small></p>
-            <p class="mb-1"><small>Chip Set : ${data.mainFeatures.chipSet}</small></p>
-            <p class="mb-1"><small>Display Size : ${data.mainFeatures.displaySize}</small></p>
-            <p class="mb-1"><small>Memory : ${data.mainFeatures.memory}</small></p>
-            <p class="mb-1"><small>Storage : ${data.mainFeatures.storage}</small></p>
-            <p class="mb-1"><small>Sensors : ${data.mainFeatures.sensors}</small></p>
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="card mb-3 border-0" style="max-width: 540px;">
+            <div class="row g-0">
+                 <div class="col-md-4 d-flex flex-column align-items-center">
+                     <img src="${data.image}" class="img-fluid rounded-start" alt="...">
+                 </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="mb-1"><small>Release Date : ${data.releaseDate}</small></p>
+                        <p class="mb-1"><small>Chip Set : ${data.mainFeatures.chipSet}</small></p> 
+                        <p class="mb-1"><small>Display Size : ${data.mainFeatures.displaySize}</small></p>
+                        <p class="mb-1"><small>Memory : ${data.mainFeatures.memory}</small></p>
+                        <p class="mb-1"><small>Storage : ${data.mainFeatures.storage}</small></p>
+                        <p class="mb-1"><small>Sensors : ${data.mainFeatures.sensors}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     `
 }
-
-loadPhone('apple')
