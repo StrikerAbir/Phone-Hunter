@@ -7,11 +7,21 @@ const loadPhone = async (value) => {
 const displayPhone = phones => {
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.innerHTML = ``;
-    phones.forEach((phone) => {
-        const div = document.createElement('div');
-        div.classList.add('col');
-        div.innerHTML = `
-        <div class="card p-3">
+    //display 20 phones only
+    phones = phones.slice(0, 20);
+
+    // display no phones found
+    const noPhone = document.getElementById('found-none');
+    if (phones.length === 0) {
+        noPhone.classList.remove('d-none');
+    } else {
+        noPhone.classList.add('d-none');
+        // display all phones
+        phones.forEach((phone) => {
+            const div = document.createElement('div');
+            div.classList.add('col');
+            div.innerHTML = `
+            <div class="card p-3">
               <img src="${phone.image}" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">${phone.phone_name}</h5>
@@ -24,8 +34,9 @@ const displayPhone = phones => {
               </div>
             </div>
         `
-        phoneContainer.appendChild(div)
-    })
+            phoneContainer.appendChild(div)
+        })
+    }
 }
 
 
@@ -34,6 +45,5 @@ document.getElementById('search-btn').addEventListener('click', () => {
     const value = searchField.value;
     searchField.value = '';
     loadPhone(value);
-    
+
 })
-loadPhone();
