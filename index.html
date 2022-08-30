@@ -16,7 +16,7 @@
       <h1>Phone Hunter</h1>
     </header>
     <main>
-        <section class="container d-flex mb-4">
+      <section class="container d-flex mb-4">
         <input
           class="form-control me-2"
           type="search"
@@ -25,20 +25,32 @@
           autocomplete="off"
           id="search-field"
         />
-        <button
-          class="btn btn-outline-success"
-          type="submit"
-          id="search-btn"
-        >
+        <button class="btn btn-outline-success" type="submit" id="search-btn">
           Search
         </button>
       </section>
       <section class="container">
-        <div id="phone-container" class="row row-cols-1 row-cols-md-4 g-4">
-          
-        </div>
+        <div
+          id="phone-container"
+          class="row row-cols-1 row-cols-md-4 g-4"
+        ></div>
         <div id="found-none" class="mt-4 text-center d-none">
-            <h3 class="text-warning">No Item Found. Please search again.</h3>
+          <h3 class="text-warning">No Item Found. Please search again.</h3>
+        </div>
+
+        <!-- loading spinner -->
+        <div id="loader" class="d-none">
+          <div
+            style="height: 200px"
+            class="d-flex align-items-center justify-content-evenly mt-4"
+          >
+            <strong>Loading...</strong>
+            <div
+              class="spinner-border text-primary"
+              role="status"
+              aria-hidden="true"
+            ></div>
+          </div>
         </div>
       </section>
     </main>
