@@ -36,7 +36,16 @@ const displayPhone = (phones, dataLimit) => {
                 <p class="card-text">
                   <strong>${phone.brand}</strong>
                 </p>
-                <button class="btn btn-success" type="submit" id="details-btn" onclick="loadDetails('${phone.slug}')">Details</button>
+                <!-- Button trigger modal -->
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#detailsModal"
+                    id="details-btn"
+                    onclick="loadDetails('${phone.slug}')"
+                >Details</button>
+                
               </div>
             </div>
         `
@@ -80,9 +89,38 @@ document.getElementById('show-btn').addEventListener('click', () => {
     searchProcess()
 })
 
-const loadDetails =async (id) => {
+const loadDetails = async (id) => {
     const url = `https://openapi.programming-hero.com/api/phone/${id}`
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data.data);
+    displayDetails(data.data);
 }
+const displayDetails = (data) => {
+    const title = document.getElementById('detailsModalLabel');
+    title.innerHTML = `<h4>${data.name}</h4> 
+    <p><strong>${data.brand}</strong></p>`
+    const modalBody = document.getElementById('modal-body');
+    modalBody.innerHTML = ``;
+    modalBody.innerHTML = `
+
+    <div class="card mb-3 border-0" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex flex-column align-items-center">
+      <img src="${data.image}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+       <p class="mb-1"><small>Release Date : ${data.releaseDate}</small></p>
+            <p class="mb-1"><small>Chip Set : ${data.mainFeatures.chipSet}</small></p>
+            <p class="mb-1"><small>Display Size : ${data.mainFeatures.displaySize}</small></p>
+            <p class="mb-1"><small>Memory : ${data.mainFeatures.memory}</small></p>
+            <p class="mb-1"><small>Storage : ${data.mainFeatures.storage}</small></p>
+            <p class="mb-1"><small>Sensors : ${data.mainFeatures.sensors}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+    `
+}
+
+loadPhone('apple')
