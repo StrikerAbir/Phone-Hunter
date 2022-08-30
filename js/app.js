@@ -1,10 +1,10 @@
-const loadPhone = async (value,dataLimit) => {
+const loadPhone = async (value, dataLimit) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${value}`
     const res = await fetch(url);
     const data = await res.json();
-    displayPhone(data.data,dataLimit)
+    displayPhone(data.data, dataLimit)
 }
-const displayPhone = (phones,dataLimit) => {
+const displayPhone = (phones, dataLimit) => {
     const phoneContainer = document.getElementById('phone-container');
     phoneContainer.innerHTML = ``;
     //display 10 phones only and show all button
@@ -15,7 +15,7 @@ const displayPhone = (phones,dataLimit) => {
     } else {
         showAll.classList.add('d-none')
     }
-    
+
 
     // display no phones found
     const noPhone = document.getElementById('found-none');
@@ -36,9 +36,7 @@ const displayPhone = (phones,dataLimit) => {
                 <p class="card-text">
                   <strong>${phone.brand}</strong>
                 </p>
-                <p class="card-text">
-                  ${phone.slug}
-                </p>
+                <button class="btn btn-success" type="submit" id="details-btn" onclick="loadDetails('${phone.slug}')">Details</button>
               </div>
             </div>
         `
@@ -47,7 +45,7 @@ const displayPhone = (phones,dataLimit) => {
     }
     //for loading spinner stop
     toggleSpinner(false)
-    
+
 }
 
 const searchProcess = (dataLimit) => {
@@ -55,13 +53,11 @@ const searchProcess = (dataLimit) => {
     toggleSpinner(true);
     const searchField = document.getElementById('search-field');
     const value = searchField.value;
-    loadPhone(value,dataLimit);
+    loadPhone(value, dataLimit);
 }
 //handle search button click
 document.getElementById('search-btn').addEventListener('click', () => {
-    
     searchProcess(10)
-
 })
 
 const toggleSpinner = (isLoading) => {
@@ -72,8 +68,21 @@ const toggleSpinner = (isLoading) => {
         loader.classList.add('d-none')
     }
 }
+// enter button work
+document.getElementById('search-field').addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+        searchProcess(10)
+    }
+})
 
 //not the best way to load show all
 document.getElementById('show-btn').addEventListener('click', () => {
     searchProcess()
 })
+
+const loadDetails =async (id) => {
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data.data);
+}
